@@ -1,0 +1,18 @@
+.weather {
+  text-align: right;
+  color: #fff;
+}
+
+.weather__forecast {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.weather__icon {
+  font-size: 25px;
+  color: #fff;
+}
+
+.weather__location {
+  font-size: 14px;
+}
