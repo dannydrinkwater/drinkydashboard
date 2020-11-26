@@ -40,18 +40,7 @@ class Calendar extends React.Component {
         <div className="month-indicator">
           <button
             className="month-indicator__btn"
-            onClick={() =>
-              self.props.onChangeDate(
-                event,
-                Date.parse(
-                  new Date(
-                    selectedDate.getFullYear(),
-                    parseInt(selectedDate.getMonth() - 1),
-                    selectedDate.getDate()
-                  )
-                )
-              )
-            }
+            onClick={() => self.props.onChangeMonth(event, "prev")}
           >
             <FiArrowLeftCircle />
           </button>
@@ -60,18 +49,7 @@ class Calendar extends React.Component {
           </time>
           <button
             className="month-indicator__btn"
-            onClick={() =>
-              self.props.onChangeDate(
-                event,
-                Date.parse(
-                  new Date(
-                    selectedDate.getFullYear(),
-                    selectedDate.getMonth() + 1,
-                    selectedDate.getDate()
-                  )
-                )
-              )
-            }
+            onClick={() => self.props.onChangeMonth(event, "next")}
           >
             <FiArrowRightCircle />
           </button>

@@ -37,15 +37,14 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentUser } = this.state;
     return (
       <div className="app">
         <BackgroundHero />
-        <Header currentUser={this.state.currentUser} />
+        <Header currentUser={currentUser} />
         <Time />
-        <h1>{this.state.currentUser ? "Welcome back" : "Welcome"}</h1>
-        {this.state.currentUser && (
-          <Journal currentUser={this.state.currentUser} />
-        )}
+        <h1>{currentUser ? "Welcome back" : "Welcome"}</h1>
+        {currentUser && <Journal currentUser={currentUser} />}
       </div>
     );
   }

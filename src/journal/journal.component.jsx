@@ -26,9 +26,11 @@ class Journal extends React.Component {
   }
 
   getJournalEntryDocument = async date => {
+    console.log("getJournalEntryDocument date", date);
     const entryRef = await this.createJournalEntryDocument(date);
     entryRef.onSnapshot(entrySnapshot => {
       const { date, notes, todos } = entrySnapshot.data();
+      console.log("getJournalEntryDocument data", new Date(date), notes, todos);
       this.setState({
         date: date,
         notes: notes,
@@ -71,8 +73,8 @@ class Journal extends React.Component {
       try {
         await entryRef.set({
           date: new Date(this.state.selectedDate),
-          notes,
-          todos
+          notes: null,
+          todos: null
         });
       } catch (error) {
         console.log("error creating journal entry", error.message);
@@ -84,9 +86,29 @@ class Journal extends React.Component {
 
   handleChangeDate = (event, date) => {
     event.preventDefault();
-    console.log("HandleDateChange", new Date(date));
     this.setState({ selectedDate: date });
     this.getJournalEntryDocument(date);
+  };
+
+  handleChangeMonth = (event, direction) => {
+    event.preventDefault();
+    // All of this due to JS not properly supporting subtraction of months (possibly because of setHours to zero)
+    let { selectedDate } = this.state;
+    selectedDate = new Date(selectedDate);
+
+    const year = selectedDate.getFullYear();
+    let month =
+      direction === "prev"
+        ? selectedDate.getMonth()
+        : selectedDate.getMonth() + 2;
+    month = month.toString().length === 1 ? "0" + month : month;
+    const date = selectedDate.getDate();
+
+    const dateString = year + "-" + month + "-" + date;
+    const newDate = new Date(dateString);
+
+    this.setState({ selectedDate: newDate });
+    this.getJournalEntryDocument(newDate);
   };
 
   handleUpdateEntry = (name, value) => {
@@ -104,6 +126,7 @@ class Journal extends React.Component {
             <Calendar
               selectedDate={selectedDate}
               onChangeDate={this.handleChangeDate}
+              onChangeMonth={this.handleChangeMonth}
             />
             <Entry
               selectedDate={selectedDate}
