@@ -26,7 +26,9 @@ class BackgroundHero extends React.Component {
 
   render() {
     if (this.state.photos !== null) {
-      var photo = this.state.photos.photos.photo[5];
+      console.log("Photos", this.state.photos);
+      var rand = Math.floor(Math.random() * this.state.photos.photos.total);
+      var photo = this.state.photos.photos.photo[rand];
       return (
         <div className="background-hero">
           <img

@@ -40,6 +40,7 @@ class BackgroundHero extends React.Component {
     )
       .then(response => response.json())
       .then(response => {
+        console.log(response);
         self.setState({
           loading: false,
           weather: response
@@ -48,7 +49,7 @@ class BackgroundHero extends React.Component {
   }
 
   componentDidMount() {
-    // this.fetchWeather();
+    this.fetchWeather();
   }
 
   render() {
@@ -66,7 +67,13 @@ class BackgroundHero extends React.Component {
               className="weather__icon"
               title={weather.weather[0].description}
             >
-              <TiWeatherSunny />
+              <img
+                src={
+                  "http://openweathermap.org/img/wn/" +
+                  weather.weather[0].icon +
+                  "@2x.png"
+                }
+              />
             </div>
             <div className="weather__temp">
               {Math.round(weather.main.temp)}°

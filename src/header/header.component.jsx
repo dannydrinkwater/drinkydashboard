@@ -5,10 +5,12 @@ import Login from "../login/login.component";
 import Weather from "../weather/weather.component";
 
 export default function Header(props) {
+  const { currentUser } = props;
+
   return (
     <div className="header">
       <Login currentUser={props.currentUser} />
-      <Weather />
+      {currentUser && <Weather />}
     </div>
   );
 }

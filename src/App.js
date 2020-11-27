@@ -10,11 +10,9 @@ import Journal from "./journal/journal.component";
 
 class App extends React.Component {
   // TODO
-  // Change months
-  // Finish the weather icons hook-up
+  // Entry isn't updating on month change, when toggling between a day with an entry, and a prev month
   // Weather refresh on window focus after 30 mins timeout
   // To-do list functionality
-  // New background image per day
 
   constructor() {
     super();
@@ -40,7 +38,7 @@ class App extends React.Component {
     const { currentUser } = this.state;
     return (
       <div className="app">
-        <BackgroundHero />
+        {currentUser && <BackgroundHero />}
         <Header currentUser={currentUser} />
         <Time />
         <h1>{currentUser ? "Welcome back" : "Welcome"}</h1>
