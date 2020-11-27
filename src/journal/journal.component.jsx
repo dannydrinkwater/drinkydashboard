@@ -26,15 +26,14 @@ class Journal extends React.Component {
   }
 
   getJournalEntryDocument = async date => {
-    console.log("getJournalEntryDocument date", date);
     const entryRef = await this.createJournalEntryDocument(date);
     entryRef.onSnapshot(entrySnapshot => {
       const { date, notes, todos } = entrySnapshot.data();
-      console.log("getJournalEntryDocument data", new Date(date), notes, todos);
       this.setState({
         date: date,
         notes: notes,
-        todos: todos
+        todos: todos,
+        lastUpdated: null
       });
     });
   };
@@ -105,7 +104,7 @@ class Journal extends React.Component {
     const date = selectedDate.getDate();
 
     const dateString = year + "-" + month + "-" + date;
-    const newDate = new Date(dateString);
+    const newDate = Date.parse(dateString);
 
     this.setState({ selectedDate: newDate });
     this.getJournalEntryDocument(newDate);

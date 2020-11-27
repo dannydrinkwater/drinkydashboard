@@ -2,7 +2,6 @@ import React from "react";
 import "./entry.styles.scss";
 
 import dayjs from "dayjs";
-import { firestore } from "../firebase/firebase.utils";
 
 class Entry extends React.Component {
   constructor(props) {

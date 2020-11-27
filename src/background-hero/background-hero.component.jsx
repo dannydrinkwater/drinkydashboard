@@ -26,22 +26,23 @@ class BackgroundHero extends React.Component {
 
   render() {
     if (this.state.photos !== null) {
-      console.log("Photos", this.state.photos);
-      var rand = Math.floor(Math.random() * this.state.photos.photos.total);
-      var photo = this.state.photos.photos.photo[rand];
+      var randomPhotoIndex = Math.floor(
+        Math.random() * this.state.photos.photos.total
+      );
+      var selectedPhoto = this.state.photos.photos.photo[randomPhotoIndex];
       return (
         <div className="background-hero">
           <img
             className="background-hero__image"
             src={
               "https://farm" +
-              photo.farm +
+              selectedPhoto.farm +
               ".staticflickr.com/" +
-              photo.server +
+              selectedPhoto.server +
               "/" +
-              photo.id +
+              selectedPhoto.id +
               "_" +
-              photo.secret +
+              selectedPhoto.secret +
               "_b.jpg"
             }
           />
